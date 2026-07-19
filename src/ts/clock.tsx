@@ -5,21 +5,57 @@ import {
   Text,
   Translate,
   useCanvasContext,
+  useOnMount,
+  useReactive,
+  useUnreactive,
   useWindowSize,
 } from '@blinkorb/rcx';
 import { Fragment } from '@blinkorb/rcx/jsx-runtime';
+import { /*getMoonTimes,*/ getTimes } from 'suncalc';
 
 import { getRadiansFromDegrees } from './utils';
 
 const HOURS_IN_DAY = 24;
 const MARKERS = [...Array(8)];
 
+const useTimeNow = () => {
+  const reactive = useReactive({ now: Date.now() });
+
+  useOnMount(() => {
+    const interval = globalThis.setInterval(() => {
+      reactive.now = Date.now();
+    }, 500);
+
+    return () => {
+      globalThis.clearInterval(interval);
+    };
+  });
+
+  return new Date(reactive.now);
+};
+
 const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
   geolocation,
 }) => {
+  const now = useTimeNow();
   const { width, height } = useCanvasContext();
   const windowSize = useWindowSize();
   const maxSize = Math.min(width, height);
+
+  const sunTimes = (() => {
+    if (!geolocation) {
+      return null;
+    }
+
+    return getTimes(now, geolocation.latitude, geolocation.longitude);
+  })();
+
+  const unreactive = useUnreactive({ rendered: false });
+
+  if (!unreactive.rendered && sunTimes) {
+    console.log(sunTimes);
+    unreactive.rendered = true;
+  }
 
   const padding = (() => {
     if (windowSize.width <= 480) {
@@ -38,11 +74,45 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
   return (
     <Translate x={width * 0.5} y={height * 0.5}>
       <Circle x={0} y={0} radius={radius} style={{ fill: '#eee' }} />
+      <Text
+        x={0}
+        y={-60}
+        style={{
+          fontSize: 20,
+          fill: 'black',
+          align: 'center',
+          baseline: 'middle',
+        }}
+      >
+        {now.toLocaleTimeString(globalThis.navigator.language, {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })}
+      </Text>
+      <Text
+        x={0}
+        y={-30}
+        style={{
+          fontSize: 20,
+          fill: 'black',
+          align: 'center',
+          baseline: 'middle',
+        }}
+      >
+        {now.toLocaleTimeString(globalThis.navigator.language, {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        })}
+      </Text>
       {geolocation && (
         <>
           <Text
             x={0}
-            y={-10}
+            y={0}
             style={{
               fontSize: 20,
               fill: 'black',
@@ -54,7 +124,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
           </Text>
           <Text
             x={0}
-            y={10}
+            y={30}
             style={{
               fontSize: 20,
               fill: 'black',

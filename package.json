@@ -38,7 +38,8 @@
     "@hono/node-server": "^2.0.10",
     "@jakesidsmith/tsb": "^4.0.0",
     "@types/node": "^22.20.1",
-    "hono": "^4.12.31"
+    "hono": "^4.12.31",
+    "suncalc": "^2.0.1"
   },
   "devDependencies": {
     "@blinkorb/eslint-config": "^0.3.1",

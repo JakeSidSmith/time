@@ -9,6 +9,8 @@ export default defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-key': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/immutability': 'off',
     },
   },
 ]);
