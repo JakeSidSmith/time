@@ -14,7 +14,7 @@ import { /*getMoonTimes,*/ getTimes, SunTimes } from 'suncalc';
 
 import Arc from './arc';
 import Marker from './marker';
-import { getRadiansFromDegrees, getSecondFromMidnight } from './utils';
+import { getRadiansFromDegrees, getSecondsFromMidnight } from './utils';
 
 const HOURS_IN_DAY = 24;
 const SECONDS_IN_A_DAY = HOURS_IN_DAY * 60 * 60;
@@ -72,7 +72,8 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
           ([key, value]) =>
             [
               key as SunTimeName,
-              ((Math.PI * 2) / SECONDS_IN_A_DAY) * getSecondFromMidnight(value),
+              ((Math.PI * 2) / SECONDS_IN_A_DAY) *
+                getSecondsFromMidnight(value),
             ] as const
         )
     ) as Partial<Record<SunTimeName, number>>;

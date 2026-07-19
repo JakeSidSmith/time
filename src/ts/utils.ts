@@ -6,7 +6,7 @@ export const getDegreesFromRadians = (radians: number): number => {
   return (radians * 180) / Math.PI;
 };
 
-export const getSecondFromMidnight = (date: Date) =>
+export const getSecondsFromMidnight = (date: Date) =>
   date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds();
 
 export const getTimeString = (date: Date) =>
