@@ -2,8 +2,10 @@
   "name": "@jakesidsmith/time",
   "version": "0.0.0",
   "description": "What time is it?",
-  "main": "src/index.ts",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "build": "tsb build",
     "dev": "tsb serve",
     "lint-check": "eslint .",
@@ -33,8 +35,10 @@
   "homepage": "https://github.com/jakesidsmith/time#readme",
   "dependencies": {
     "@blinkorb/rcx": "^0.1.3",
+    "@hono/node-server": "^2.0.10",
     "@jakesidsmith/tsb": "^4.0.0",
-    "@types/node": "^22.20.1"
+    "@types/node": "^22.20.1",
+    "hono": "^4.12.31"
   },
   "devDependencies": {
     "@blinkorb/eslint-config": "^0.3.1",
