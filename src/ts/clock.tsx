@@ -1,6 +1,7 @@
 import {
   Circle,
   Line,
+  RCXComponent,
   Text,
   Translate,
   useCanvasContext,
@@ -13,7 +14,9 @@ import { getRadiansFromDegrees } from './utils';
 const HOURS_IN_DAY = 24;
 const MARKERS = [...Array(8)];
 
-const Clock = () => {
+const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
+  geolocation,
+}) => {
   const { width, height } = useCanvasContext();
   const windowSize = useWindowSize();
   const maxSize = Math.min(width, height);
@@ -35,6 +38,34 @@ const Clock = () => {
   return (
     <Translate x={width * 0.5} y={height * 0.5}>
       <Circle x={0} y={0} radius={radius} style={{ fill: '#eee' }} />
+      {geolocation && (
+        <>
+          <Text
+            x={0}
+            y={-10}
+            style={{
+              fontSize: 20,
+              fill: 'black',
+              align: 'center',
+              baseline: 'middle',
+            }}
+          >
+            Lat: {geolocation.latitude}
+          </Text>
+          <Text
+            x={0}
+            y={10}
+            style={{
+              fontSize: 20,
+              fill: 'black',
+              align: 'center',
+              baseline: 'middle',
+            }}
+          >
+            Lng: {geolocation.longitude}
+          </Text>
+        </>
+      )}
       {MARKERS.map((_empty, index) => {
         const angle = getRadiansFromDegrees(
           (360 / MARKERS.length) * index - 90

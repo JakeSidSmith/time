@@ -6,6 +6,7 @@ const config: Config = {
   outDir: 'build',
   tsconfigPath: './tsconfig.dist.json',
   publicDir: './static',
+  https: true,
 };
 
 export default config;

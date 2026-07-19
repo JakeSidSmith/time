@@ -1,11 +1,28 @@
-import { Canvas, createRoot } from '@blinkorb/rcx';
+import { Canvas, createRoot, useOnMount, useReactive } from '@blinkorb/rcx';
 
 import Clock from './clock';
 
 const App = () => {
+  const reactive = useReactive<{ geolocation: null | GeolocationCoordinates }>({
+    geolocation: null,
+  });
+
+  useOnMount(() => {
+    if ('geolocation' in globalThis.navigator) {
+      globalThis.navigator.geolocation.getCurrentPosition(
+        (location) => {
+          reactive.geolocation = location.coords;
+        },
+        (error) => {
+          alert(error.message);
+        }
+      );
+    }
+  });
+
   return (
     <Canvas>
-      <Clock />
+      <Clock geolocation={reactive.geolocation} />
     </Canvas>
   );
 };
