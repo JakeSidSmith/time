@@ -134,7 +134,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
           hour12: true,
         })}
       </Text>
-      {geolocation && (
+      {/* {geolocation && (
         <>
           <Text
             x={0}
@@ -161,7 +161,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
             Lng: {geolocation.longitude}
           </Text>
         </>
-      )}
+      )} */}
       {MARKERS.map((_empty, index) => {
         const angle = getRadiansFromDegrees(
           (360 / MARKERS.length) * index - 90
