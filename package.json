@@ -1,0 +1,44 @@
+{
+  "name": "@jakesidsmith/time",
+  "version": "0.0.0",
+  "description": "What time is it?",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsb serve",
+    "lint-check": "eslint .",
+    "lint-fix": "npm run lint-check -- --fix",
+    "format-check": "prettier --check .",
+    "format-fix": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "tests-all": "jest --coverage",
+    "test": "npm run format-check && npm run type-check && npm run lint-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakesidsmith/time.git"
+  },
+  "keywords": [
+    "what",
+    "time",
+    "clock",
+    "hour",
+    "day"
+  ],
+  "author": "Jake 'Sid' Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jakesidsmith/time/issues"
+  },
+  "homepage": "https://github.com/jakesidsmith/time#readme",
+  "dependencies": {
+    "@blinkorb/rcx": "^0.1.3",
+    "@jakesidsmith/tsb": "^4.0.0",
+    "@types/node": "^22.20.1"
+  },
+  "devDependencies": {
+    "@blinkorb/eslint-config": "^0.3.1",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.5",
+    "typescript": "^6.0.3"
+  }
+}
