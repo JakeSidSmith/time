@@ -1,7 +1,10 @@
 import {
   AnyObject,
   Circle,
+  Line,
+  Path,
   RCXComponent,
+  Rotate,
   Text,
   Translate,
   useCanvasContext,
@@ -54,6 +57,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
   geolocation,
 }) => {
   const now = useTimeNow();
+
   const { width, height } = useCanvasContext();
   const windowSize = useWindowSize();
   const maxSize = Math.min(width, height);
@@ -331,6 +335,34 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
           )}
         </>
       )}
+      <Circle x={0} y={0} radius={5} style={{ fill: 'black' }} />
+      <Rotate
+        rotation={
+          ((Math.PI * 2) / SECONDS_IN_A_DAY) * getSecondsFromMidnight(now) -
+          Math.PI * 0.5
+        }
+      >
+        <Line
+          startX={0}
+          startY={0}
+          endX={radius}
+          endY={0}
+          style={{ stroke: 'black', strokeWidth: 1 }}
+        />
+        <Translate x={radius - 65} y={0}>
+          <Path
+            beginPath
+            closePath
+            points={[
+              { x: 0, y: 0 },
+              { x: -10, y: 5 },
+              { x: -20, y: 0 },
+              { x: -10, y: -5 },
+            ]}
+            style={{ fill: 'black' }}
+          />
+        </Translate>
+      </Rotate>
     </Translate>
   );
 };
