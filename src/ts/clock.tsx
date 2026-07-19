@@ -193,6 +193,20 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
           </Fragment>
         );
       })}
+      <Arc
+        outerRadius={radius - 120}
+        thickness={20}
+        startAngle={Math.PI * -0.5}
+        endAngle={Math.PI * 0.5}
+        style={{ fill: '#6771ff' }}
+      />
+      <Arc
+        outerRadius={radius - 120}
+        thickness={20}
+        startAngle={Math.PI * 0.5}
+        endAngle={Math.PI * 1.5}
+        style={{ fill: '#5ee0a1' }}
+      />
       {sunTimesInRadians && (
         /*
         ['night', 0.1174461142487851]
@@ -258,7 +272,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 thickness={20}
                 startAngle={sunTimesInRadians.sunriseEnd - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.sunsetStart - Math.PI * 0.5}
-                style={{ fill: '#5990dd' }}
+                style={{ fill: '#66abff' }}
               />
             )}
           {typeof sunTimesInRadians.sunsetStart === 'number' &&
