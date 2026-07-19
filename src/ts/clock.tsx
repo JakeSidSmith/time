@@ -233,7 +233,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 thickness={20}
                 startAngle={sunTimesInRadians.dawn - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.sunrise - Math.PI * 0.5}
-                style={{ fill: 'orange' }}
+                style={{ fill: 'red' }}
               />
             )}
           {typeof sunTimesInRadians.sunrise === 'number' &&
@@ -243,7 +243,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 thickness={20}
                 startAngle={sunTimesInRadians.sunrise - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.sunriseEnd - Math.PI * 0.5}
-                style={{ fill: 'yellow' }}
+                style={{ fill: 'orange' }}
               />
             )}
           {typeof sunTimesInRadians.sunriseEnd === 'number' &&
@@ -263,7 +263,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 thickness={20}
                 startAngle={sunTimesInRadians.sunsetStart - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.sunset - Math.PI * 0.5}
-                style={{ fill: 'yellow' }}
+                style={{ fill: 'orange' }}
               />
             )}
           {typeof sunTimesInRadians.sunset === 'number' &&
@@ -273,7 +273,7 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 thickness={20}
                 startAngle={sunTimesInRadians.sunset - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.dusk - Math.PI * 0.5}
-                style={{ fill: 'orange' }}
+                style={{ fill: 'red' }}
               />
             )}
           {typeof sunTimesInRadians.dusk === 'number' &&
@@ -284,6 +284,16 @@ const Clock: RCXComponent<{ geolocation: null | GeolocationCoordinates }> = ({
                 startAngle={sunTimesInRadians.dusk - Math.PI * 0.5}
                 endAngle={sunTimesInRadians.night - Math.PI * 0.5}
                 style={{ fill: '#3b4a7c' }}
+              />
+            )}
+          {typeof sunTimesInRadians.goldenHour === 'number' &&
+            typeof sunTimesInRadians.goldenHourEnd === 'number' && (
+              <Arc
+                outerRadius={radius - 90}
+                thickness={10}
+                startAngle={sunTimesInRadians.goldenHour - Math.PI * 0.5}
+                endAngle={sunTimesInRadians.goldenHourEnd - Math.PI * 0.5}
+                style={{ fill: 'orange' }}
               />
             )}
           {typeof sunTimesInRadians.nauticalDawn === 'number' && (
