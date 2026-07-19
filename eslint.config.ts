@@ -8,6 +8,7 @@ export default defineConfig([
   {
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'react/jsx-key': 'off',
     },
   },
 ]);
