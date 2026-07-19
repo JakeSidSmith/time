@@ -1,9 +1,11 @@
-import { Canvas, createRoot, Rectangle } from '@blinkorb/rcx';
+import { Canvas, createRoot } from '@blinkorb/rcx';
+
+import Clock from './clock';
 
 const App = () => {
   return (
     <Canvas>
-      <Rectangle x={0} y={0} width={100} height={100} style={{ fill: 'red' }} />
+      <Clock />
     </Canvas>
   );
 };
